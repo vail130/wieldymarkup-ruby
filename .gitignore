@@ -1,0 +1,4 @@
+.yardoc/
+*.gem
+.komodotools/
+*.komodoproject
