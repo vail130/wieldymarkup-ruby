@@ -1,0 +1,93 @@
+#!/usr/bin/env ruby
+
+require 'wieldymarkup'
+
+# Creates an HTML file by running the WieldyMarkup compiler on the contents
+#   of the provided WML file.
+#
+# @param [String] filepath The path to the WML file
+# @param [Hash] options The options for compiling the input text
+# @option options [String] :strict
+#   Whether or not to raise an error for invalid filepaths
+# @option options [String] :compress
+#   Whether to leave whitespace between HTML tags or not
+def compile_file_from_path(filepath, options={})
+  defaults = {:strict => true, :compress => false}
+  options = defaults.merge options
+  
+  ext = filepath.split('/')[-1].split('.')[-1]
+  if ext != 'wml'
+    puts ext
+    if options[:strict]
+      raise Exception, "Invalid extension for (#{filepath}). Must be .wml."
+    else
+      return
+    end
+  end
+  
+  file = File.open(filepath, 'rb')
+  data = file.read
+  
+  html = Compiler.new(:text => data, :compress => options[:compress]).output
+  
+  temp = filepath.split('/')
+  temp.pop()
+  filename = temp.join('/') << '/' << filepath.split('/')[-1].split('.')[0] << '.html'
+  File.open(filename, 'wb') {|f| f.write(html) }
+end
+
+
+# Compiles WML files into HTML files based on command line options.
+#
+# @param [Array] args The command line arguments
+def compile_from_command_line(args)
+  compress = false
+  if args.index("-c") != nil or args.index("--compress") != nil
+    compress = true
+    args = args.keep_if { |arg| ["-c", "--compress"].index(arg) == nil }
+  end
+  
+  if args.index("-d") != nil
+    d_index = args.index("-d")
+    if args.length < d_index + 1
+      raise Exception, "The -d argument must be followed immediately by a directory path in which to compiler .wml files."
+    end
+    
+    dir_path = args[d_index + 1]
+    
+    if !File.directory? dir_path
+      raise Exception, "Invalid directory path following -d argument."
+    end
+    
+    Dir.chdir dir_path
+    if args["-r"] != nil
+      Dir['**/*'].each { |f|
+        if File.directory? f and ['.', '..'][f] == nil
+          puts f
+          compile_file_from_path(f, :strict => false, :compress => compress)
+        end
+      }
+    else
+      Dir['*'].each { |f|
+        if File.directory? f and ['.', '..'][f] == nil
+          puts f
+          compile_file_from_path(f, :strict => false, :compress => compress)
+        end
+      }
+    end
+    
+  else
+    strict = true
+    if args.index("-f") != nil or args.index("--force") != nil
+      strict = false
+      args = args.keep_if { |arg| ["-f", "--force"].index(arg) == nil }
+    end
+    
+    args.each { |filepath|
+      compile_file_from_path(filepath, :strict => strict, :compress => compress)
+    }
+    
+  end
+end
+
+compile_from_command_line ARGV

@@ -101,10 +101,11 @@ class Compiler
     #   The substring that denotes a decrase in nesting level.
     # @return [String] The substring from the beginning of the line until the
     #   first whitespace character
-    def get_tag_nest_level(text, delimiters={:open_string => '<', :close_string => '>'})
-      d = delimiters[0]
-      open_string = (d != nil and d[:open_string] != nil) ? d[:open_string] : '<'
-      close_string = (d != nil and d[:close_string] != nil) ? d[:close_string] : '>'
+    def get_tag_nest_level(text, delimiters={})
+      defaults = {:open_string => '<', :close_string => '>'}
+      delimiters = defaults.merge delimiters
+      open_string = delimiters[:open_string] != nil ? delimiters[:open_string] : '<'
+      close_string = delimiters[:close_string] != nil ? delimiters[:close_string] : '>'
       
       text = text * 1
       nest_level = 0
@@ -181,9 +182,11 @@ class Compiler
   #   The input text to compile
   # @option options [String] :compress
   #   Whether to leave whitespace between HTML tags or not
-  def initialize(options={:text => "", :compress => false})
-    @text = (options != nil and options[:text] != nil) ? options[:text] : ''
-    @compress = (options != nil and [true, false].index(options[:compress]) != nil) ? !!options[:compress] : false
+  def initialize(options={})
+    defaults = {:text => "", :compress => false}
+    options = defaults.merge options
+    @text = options[:text] != nil ? options[:text] : ''
+    @compress = options[:compress] != nil ? !!options[:compress] : false
     
     @output = ""
     @open_tags = []
@@ -206,7 +209,9 @@ class Compiler
   # @option options [String] :compress
   #   Whether to leave whitespace between HTML tags or not
   # @return [String] The compiled HTML
-  def compile(options={:text => nil, :compress => nil})
+  def compile(options={})
+    defaults = {:text => nil, :compress => nil}
+    options = defaults.merge options
     @text = options[:text] if options[:text] != nil
     @compress = !!options[:compress] if options[:compress] != nil
     

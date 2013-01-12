@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'wieldymarkup'
-  s.version     = '0.0.1'
+  s.version     = '0.2.0'
   s.date        = '2013-01-11'
   s.summary     = "WieldyMarkup HTML Abstraction Markup Language Compiler"
   s.author      = "Vail Gold"
@@ -13,5 +13,7 @@ Gem::Specification.new do |s|
     as well, like Underscore, Mustache, et cetera.
     See http://www.github.com/vail130/wieldymarkup-ruby for more information.
   EOF
+  
+  s.executables << 'wieldymarkup'
   
 end

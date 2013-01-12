@@ -636,7 +636,7 @@ tags.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_tag_nest_level-class_method" title="get_tag_nest_level (class method)">+ (String) <strong>get_tag_nest_level</strong>(text, delimiters = {:open_string =&gt; '&lt;', :close_string =&gt; '&gt;'}) </a>
+      <a href="#get_tag_nest_level-class_method" title="get_tag_nest_level (class method)">+ (String) <strong>get_tag_nest_level</strong>(text, delimiters = {}) </a>
     
 
     
@@ -765,7 +765,7 @@ tags.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#compile-instance_method" title="#compile (instance method)">- (String) <strong>compile</strong>(options = {:text =&gt; nil, :compress =&gt; nil}) </a>
+      <a href="#compile-instance_method" title="#compile (instance method)">- (String) <strong>compile</strong>(options = {}) </a>
     
 
     
@@ -789,7 +789,7 @@ tags.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Compiler) <strong>initialize</strong>(options = {:text =&gt; &quot;&quot;, :compress =&gt; false}) </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Compiler) <strong>initialize</strong>(options = {}) </a>
     
 
     
@@ -941,7 +941,7 @@ tags.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    - (<tt><span class='object_link'><a href="" title="Compiler (class)">Compiler</a></span></tt>) <strong>initialize</strong>(options = {:text =&gt; &quot;&quot;, :compress =&gt; false}) 
+    - (<tt><span class='object_link'><a href="" title="Compiler (class)">Compiler</a></span></tt>) <strong>initialize</strong>(options = {}) 
   
 
   
@@ -969,7 +969,7 @@ tags.</p>
         <span class='type'>(<tt>Hash</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>{:text =&gt; &quot;&quot;, :compress =&gt; false}</tt>)</em>
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
       
       
         &mdash;
@@ -1023,7 +1023,6 @@ tags.</p>
       <pre class="lines">
 
 
-184
 185
 186
 187
@@ -1038,14 +1037,19 @@ tags.</p>
 196
 197
 198
-199</pre>
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 184</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 185</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='symbol'>:text</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:compress</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@text</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='kw'>and</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:text</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:text</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
-  <span class='ivar'>@compress</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='kw'>and</span> <span class='lbracket'>[</span><span class='kw'>true</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:compress</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='op'>!</span><span class='op'>!</span><span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:compress</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='kw'>false</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='symbol'>:text</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:compress</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='id identifier rubyid_defaults'>defaults</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span> <span class='id identifier rubyid_options'>options</span>
+  <span class='ivar'>@text</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:text</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='op'>?</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:text</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+  <span class='ivar'>@compress</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:compress</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='op'>?</span> <span class='op'>!</span><span class='op'>!</span><span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:compress</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='kw'>false</span>
   
   <span class='ivar'>@output</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
   <span class='ivar'>@open_tags</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -1884,7 +1888,6 @@ tags</p>
       <pre class="lines">
 
 
-156
 157
 158
 159
@@ -1900,10 +1903,11 @@ tags</p>
 169
 170
 171
-172</pre>
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_leading_whitespace_from_text'>get_leading_whitespace_from_text</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_leading_whitespace'>leading_whitespace</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -2040,7 +2044,7 @@ character</p>
       <div class="method_details ">
   <h3 class="signature " id="get_tag_nest_level-class_method">
   
-    + (<tt>String</tt>) <strong>get_tag_nest_level</strong>(text, delimiters = {:open_string =&gt; '&lt;', :close_string =&gt; '&gt;'}) 
+    + (<tt>String</tt>) <strong>get_tag_nest_level</strong>(text, delimiters = {}) 
   
 
   
@@ -2082,7 +2086,7 @@ character</p>
         <span class='type'>(<tt>Hash</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>{:open_string =&gt; '&lt;', :close_string =&gt; '&gt;'}</tt>)</em>
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
       
       
         &mdash;
@@ -2203,15 +2207,17 @@ character</p>
 147
 148
 149
-150</pre>
+150
+151</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 104</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_get_tag_nest_level'>get_tag_nest_level</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_delimiters'>delimiters</span><span class='op'>=</span><span class='lbrace'>{</span><span class='symbol'>:open_string</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&lt;</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:close_string</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_d'>d</span> <span class='op'>=</span> <span class='id identifier rubyid_delimiters'>delimiters</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_open_string'>open_string</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_d'>d</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='kw'>and</span> <span class='id identifier rubyid_d'>d</span><span class='lbracket'>[</span><span class='symbol'>:open_string</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_d'>d</span><span class='lbracket'>[</span><span class='symbol'>:open_string</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&lt;</span><span class='tstring_end'>'</span></span>
-  <span class='id identifier rubyid_close_string'>close_string</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_d'>d</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='kw'>and</span> <span class='id identifier rubyid_d'>d</span><span class='lbracket'>[</span><span class='symbol'>:close_string</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_d'>d</span><span class='lbracket'>[</span><span class='symbol'>:close_string</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>'</span></span>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_tag_nest_level'>get_tag_nest_level</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_delimiters'>delimiters</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='symbol'>:open_string</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&lt;</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:close_string</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_delimiters'>delimiters</span> <span class='op'>=</span> <span class='id identifier rubyid_defaults'>defaults</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span> <span class='id identifier rubyid_delimiters'>delimiters</span>
+  <span class='id identifier rubyid_open_string'>open_string</span> <span class='op'>=</span> <span class='id identifier rubyid_delimiters'>delimiters</span><span class='lbracket'>[</span><span class='symbol'>:open_string</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='op'>?</span> <span class='id identifier rubyid_delimiters'>delimiters</span><span class='lbracket'>[</span><span class='symbol'>:open_string</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&lt;</span><span class='tstring_end'>'</span></span>
+  <span class='id identifier rubyid_close_string'>close_string</span> <span class='op'>=</span> <span class='id identifier rubyid_delimiters'>delimiters</span><span class='lbracket'>[</span><span class='symbol'>:close_string</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='op'>?</span> <span class='id identifier rubyid_delimiters'>delimiters</span><span class='lbracket'>[</span><span class='symbol'>:close_string</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>'</span></span>
   
   <span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span> <span class='op'>*</span> <span class='int'>1</span>
   <span class='id identifier rubyid_nest_level'>nest_level</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -2459,11 +2465,6 @@ character</p>
       <pre class="lines">
 
 
-562
-563
-564
-565
-566
 567
 568
 569
@@ -2515,10 +2516,15 @@ character</p>
 615
 616
 617
-618</pre>
+618
+619
+620
+621
+622
+623</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 562</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 567</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_html_to_output'>add_html_to_output</span>
   <span class='kw'>if</span> <span class='op'>!</span><span class='ivar'>@line_starts_with_tick</span>
@@ -2626,19 +2632,19 @@ character</p>
       <pre class="lines">
 
 
-254
-255
-256
-257
-258
 259
 260
 261
 262
-263</pre>
+263
+264
+265
+266
+267
+268</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 254</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 259</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close_lower_level_tags'>close_lower_level_tags</span>
   <span class='comment'># If indentation level is less than or equal to previous level
@@ -2699,20 +2705,20 @@ character</p>
       <pre class="lines">
 
 
-268
-269
-270
-271
-272
 273
 274
 275
 276
 277
-278</pre>
+278
+279
+280
+281
+282
+283</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 268</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 273</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close_tag'>close_tag</span>
   <span class='id identifier rubyid_closing_tag_array'>closing_tag_array</span> <span class='op'>=</span> <span class='ivar'>@open_tags</span><span class='period'>.</span><span class='id identifier rubyid_pop'>pop</span>
@@ -2733,7 +2739,7 @@ character</p>
       <div class="method_details ">
   <h3 class="signature " id="compile-instance_method">
   
-    - (<tt>String</tt>) <strong>compile</strong>(options = {:text =&gt; nil, :compress =&gt; nil}) 
+    - (<tt>String</tt>) <strong>compile</strong>(options = {}) 
   
 
   
@@ -2759,7 +2765,7 @@ character</p>
         <span class='type'>(<tt>Hash</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>{:text =&gt; nil, :compress =&gt; nil}</tt>)</em>
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
       
       
         &mdash;
@@ -2831,9 +2837,6 @@ character</p>
       <pre class="lines">
 
 
-209
-210
-211
 212
 213
 214
@@ -2844,12 +2847,19 @@ character</p>
 219
 220
 221
-222</pre>
+222
+223
+224
+225
+226
+227</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 209</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 212</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_compile'>compile</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='symbol'>:text</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='symbol'>:compress</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_compile'>compile</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='symbol'>:text</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='symbol'>:compress</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='id identifier rubyid_defaults'>defaults</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span> <span class='id identifier rubyid_options'>options</span>
   <span class='ivar'>@text</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:text</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:text</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='kw'>nil</span>
   <span class='ivar'>@compress</span> <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:compress</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:compress</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='kw'>nil</span>
   
@@ -2935,11 +2945,6 @@ string.</code></pre>
       <pre class="lines">
 
 
-478
-479
-480
-481
-482
 483
 484
 485
@@ -3014,10 +3019,15 @@ string.</code></pre>
 554
 555
 556
-557</pre>
+557
+558
+559
+560
+561
+562</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 478</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 483</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_attributes'>process_attributes</span><span class='lparen'>(</span><span class='id identifier rubyid_rest_of_line'>rest_of_line</span><span class='rparen'>)</span>
   <span class='ivar'>@tag_attributes</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -3148,11 +3158,6 @@ string.</code></pre>
       <pre class="lines">
 
 
-227
-228
-229
-230
-231
 232
 233
 234
@@ -3170,10 +3175,15 @@ string.</code></pre>
 246
 247
 248
-249</pre>
+249
+250
+251
+252
+253
+254</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 227</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 232</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_current_level'>process_current_level</span>
   <span class='ivar'>@previous_level</span> <span class='op'>=</span> <span class='ivar'>@current_level</span> <span class='op'>*</span> <span class='int'>1</span>
@@ -3269,20 +3279,20 @@ string.</code></pre>
       <pre class="lines">
 
 
-389
-390
-391
-392
-393
 394
 395
 396
 397
 398
-399</pre>
+399
+400
+401
+402
+403
+404</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 389</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 394</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_embedded_line'>process_embedded_line</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
   <span class='ivar'>@line_starts_with_tick</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -3346,11 +3356,6 @@ string.</code></pre>
       <pre class="lines">
 
 
-284
-285
-286
-287
-288
 289
 290
 291
@@ -3443,10 +3448,15 @@ string.</code></pre>
 378
 379
 380
-381</pre>
+381
+382
+383
+384
+385
+386</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 289</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_next_line'>process_next_line</span>
   <span class='ivar'>@line_starts_with_tick</span> <span class='op'>=</span> <span class='kw'>false</span>
@@ -3615,11 +3625,6 @@ string.</code></pre>
       <pre class="lines">
 
 
-406
-407
-408
-409
-410
 411
 412
 413
@@ -3678,10 +3683,15 @@ string.</code></pre>
 466
 467
 468
-469</pre>
+469
+470
+471
+472
+473
+474</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 406</span>
+      <pre class="code"><span class="info file"># File 'lib/wieldymarkup.rb', line 411</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_selector'>process_selector</span><span class='lparen'>(</span><span class='id identifier rubyid_selector'>selector</span><span class='rparen'>)</span>
   <span class='comment'># Parse the first piece as a selector, defaulting to DIV tag if none is specified
@@ -3757,7 +3767,7 @@ string.</code></pre>
 </div>
 
     <div id="footer">
-  Generated on Sat Jan 12 13:38:57 2013 by
+  Generated on Sat Jan 12 15:01:36 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.3 (ruby-1.9.3).
 </div>
